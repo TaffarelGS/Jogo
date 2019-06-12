@@ -1,0 +1,84 @@
+#include <stdio.h>
+#include <math.h>
+#include <allegro5/allegro.h>
+#include <allegro5/allegro_image.h>// adicionar imagens
+#include <allegro5/allegro_audio.h> //bibliotecas de audio
+#include <allegro5/allegro_acodec.h>//bibliotecas de audio
+#include <allegro5/allegro_primitives.h>//bibliotecas para circulos tiangulos retangulos
+#include <allegro5/allegro_font.h> //para escrever
+#include <allegro5/allegro_ttf.h>  // para escrever
+
+//--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+// variaveis globais
+//tela
+const float FPS = 100;
+const int telay = 300;
+const int telax = 1124;
+
+//Cores
+int r=255,g=255,b=20; // variaveis das cores
+
+//usado para testede colisao com inimigos
+int distanciax=0;
+int distanciay=0;
+
+//contador de inimigos assassinados
+int cont=0;
+
+//variaveis do heroi
+
+//variaveis do inimigo
+
+//variaveis do boss
+
+//Funções usadas
+void colisao_com_inimigos(); //direcao ecolisao do heroi com os inimigos
+void colisao_horizontal();//direcao e colisao dos inimigos com a tela em x
+void colisao_vertical();//direcao e colisao dos inimigos com a tela em y
+void colisao_diagonal1();//direcao e colisao dos inimigos com tela em x ou y
+void colisao_diagonal2();//direcao e colisao dos inimigos com tela em x ou y
+
+
+
+int main()
+{
+    ALLEGRO_DISPLAY *display = NULL; //declara o display
+    ALLEGRO_FONT *fonte = NULL; // declara a fonte pra escrever
+    ALLEGRO_EVENT_QUEUE *event_queue = NULL;// os eventos
+    ALLEGRO_TIMER *timer = NULL;// tempo para teclado mouse e eventos
+    ALLEGRO_TTF_NO_KERNING;
+    ALLEGRO_AUDIO_STREAM *musica= NULL;
+    ALLEGRO_SAMPLE *sample =NULL;
+//--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    al_init();
+    if(!al_init())
+    {
+        fprintf(stderr, "failed to initialize allegro!\n");
+        return -1;
+    }
+
+    al_init_font_addon();
+    if(!al_init_ttf_addon())
+    {
+        fprintf(stderr, "falha na fonte ttf\n");
+        return -1;
+    }
+
+
+    timer = al_create_timer(1.0 / FPS);
+    if(!timer)
+    {
+        fprintf(stderr, "failed to create timer!\n");
+        return -1;
+    }
+
+    janela = al_create_display(640,480);
+
+    al_clear_to_color(al_map_rgb(250,250,250));
+
+    al_flip_display();
+
+    al_rest(10.0);
+
+    al_destroy_display(janela);
+}
